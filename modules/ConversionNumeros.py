@@ -8,9 +8,9 @@ from utilities.Validator import is_empty, is_correct_binary, is_correct_decimal,
     is_correct_any_ip_bin
 
 
-class NumberConversion(QWidget):
+class ConversionNumeros(QWidget):
     def __init__(self):
-        super(NumberConversion, self).__init__()
+        super(ConversionNumeros, self).__init__()
 
         # App attributes
         self.bin_format_base = None

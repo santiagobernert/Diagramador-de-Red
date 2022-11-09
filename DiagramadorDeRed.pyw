@@ -6,7 +6,7 @@ from PySide2.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, Q
 
 from modules.InformacionIP import InformacionIP
 from modules.CalcularSubred import CalcularSubred
-from modules.ConversionNumero import ConversionNumero
+from modules.ConversionNumeros import ConversionNumeros
 from modules.CalcularVLSM import CalcularVLSM
 from utilities.Style import style
 

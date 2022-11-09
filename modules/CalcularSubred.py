@@ -12,9 +12,9 @@ from utilities.PopupWindow import PopupWindow
 from utilities.Validator import is_empty, is_correct_network_address, is_correct_number_of_subnets
 
 
-class IpSubnetCalculation(QWidget):
+class CalcularSubred(QWidget):
     def __init__(self):
-        super(IpSubnetCalculation, self).__init__()
+        super(CalcularSubred, self).__init__()
 
         # App attributes
         self.network_ip = None

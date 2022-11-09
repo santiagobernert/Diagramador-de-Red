@@ -9,9 +9,9 @@ from pyperclip import copy
 from utilities.PopupWindow import PopupWindow
 from utilities.Validator import is_empty, is_correct_prefix, is_correct_mask, is_correct_ip_with_prefix
 
-class IpInformation(QWidget):
+class InformacionIP(QWidget):
     def __init__(self):
-        super(IpInformation, self).__init__()
+        super(InformacionIP, self).__init__()
 
 
         main_layout = QGridLayout()

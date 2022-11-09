@@ -11,9 +11,9 @@ from utilities.PopupWindow import PopupWindow
 from utilities.Validator import is_empty, is_correct_network_address, is_correct_endpoint_numbers_per_network, is_correct_prefix
 
 
-class VlsmCalculation(QWidget):
+class CalcularVLSM(QWidget):
     def __init__(self):
-        super(VlsmCalculation, self).__init__()
+        super(CalcularVLSM, self).__init__()
 
 
         # App attributes
