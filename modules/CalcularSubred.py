@@ -48,7 +48,7 @@ class CalcularSubred(QWidget):
         top_bar.addWidget(self.number_of_subnets_label, 1, 0)
         top_bar.addWidget(self.number_of_subnets_input, 1, 1)
 
-        self.calculation_button = QPushButton(self.ml.get_tr_text("tab_ipsubnet_calc_btn"))
+        self.calculation_button = QPushButton("Calcular")
         self.calculation_button.clicked.connect(self.calculation_action)
         self.calculation_button.setIcon(QIcon("static/images/get_info.png"))
         main_layout.addWidget(self.calculation_button, alignment=Qt.AlignCenter)

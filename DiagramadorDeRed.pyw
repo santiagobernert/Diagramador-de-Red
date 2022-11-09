@@ -24,7 +24,7 @@ class NetworkAssistant(QMainWindow):
                 Qt.LeftToRight,
                 Qt.AlignCenter,
                 self.size(),
-                QGuiApplication.primaryScreen().availableGeomeMenubar_langtry(),
+                QGuiApplication.primaryScreen().availableGeometry(),
             ),
         )
 
@@ -43,7 +43,7 @@ class NetworkAssistant(QMainWindow):
         main_layout = QVBoxLayout(central_widget)
 
         self.ip_information = InformacionIP()
-        self.number_conversion = ConversionNumero()
+        self.number_conversion = ConversionNumeros()
         self.ip_subnet_calculation = CalcularSubred()
         self.vlsm_calculation = CalcularVLSM()
 
