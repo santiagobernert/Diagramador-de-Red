@@ -6,17 +6,17 @@ QWidget {
 }
 
 QMainWindow {
-    background-color: #2a2f38;
+    background-color: #232323;
 }
 
 QGroupBox  {
-    background-color: #2a2f38;
+    background-color: #232323;
     color: white;
 }
 
 QTabWidget::pane {
-    border: 1px solid white;
-    background-color: #2a2f38;
+    border: none;
+    background-color: #232323;
 }
 
 QTabBar::tab {

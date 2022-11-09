@@ -20,7 +20,7 @@ class PopupWindow(QMessageBox):
         )
 
         msgbox.setWindowIcon(QIcon("static/images/main_icon.png"))
-        title = "Network Assistant"
+        title = "Diagramador de red"
 
         if popup_type == "warning":
             msgbox.warning(self, title, text)
