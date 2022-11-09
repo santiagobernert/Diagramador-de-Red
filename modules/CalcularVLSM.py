@@ -57,7 +57,7 @@ class VlsmCalculation(QWidget):
         top_bar.addWidget(self.endpoint_numbers_per_network_label, 2, 0)
         top_bar.addWidget(self.endpoint_numbers_per_network_input, 2, 1)
 
-        self.calculation_button = QPushButton(self.ml.get_tr_text("tab_vlsm_calc_btn"))
+        self.calculation_button = QPushButton("Calcular")
         self.calculation_button.setIcon(QIcon("static/images/get_info.png"))
         self.calculation_button.clicked.connect(self.calculation_action)
         main_layout.addWidget(self.calculation_button, alignment=Qt.AlignCenter)
