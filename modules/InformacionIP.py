@@ -6,7 +6,6 @@ from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QWidget, QLabel, QGroupBox, QGridLayout, QLineEdit, QPushButton
 from pyperclip import copy
 
-from utilities.ManageLng import ManageLng
 from utilities.PopupWindow import PopupWindow
 from utilities.Validator import is_empty, is_correct_prefix, is_correct_mask, is_correct_ip_with_prefix
 
@@ -14,8 +13,6 @@ class IpInformation(QWidget):
     def __init__(self):
         super(IpInformation, self).__init__()
 
-        # Use language settings
-        self.ml = ManageLng()
 
         main_layout = QGridLayout()
         self.setLayout(main_layout)
@@ -242,45 +239,6 @@ class IpInformation(QWidget):
                         self.ml.get_tr_text("tab_ip_information_warning09"),
                         self.ip_address_textfield)
 
-    def re_translate_ui(self, lang):
-        self.ml = ManageLng(lang)
-
-        if self.ip_address_textfield.text():
-            ip = self.ip_address_textfield.text().split("/")[0]
-            prefix = self.ip_address_textfield.text().split("/")[1]
-        else:
-            ip = None
-            prefix = None
-
-        self.prefix_mask_box.setTitle(self.ml.get_tr_text("tab_ip_information_prefix_mask_conv"))
-        self.prefix_input.setPlaceholderText(self.ml.get_tr_text("tab_ip_information_prefix_ptext"))
-        self.mask_input.setPlaceholderText(self.ml.get_tr_text("tab_ip_information_mask_ptext"))
-        self.convert_btn.setText(self.ml.get_tr_text("tab_ip_information_conv_btn"))
-        self.ip_information_box.setTitle(self.ml.get_tr_text("tab_ip_information_ipinfo_gbox"))
-        self.ip_address_label.setText(self.ml.get_tr_text("tab_ip_information_ipadd_lab"))
-        self.get_info_btn.setText(self.ml.get_tr_text("tab_ip_information_getinfo_btn"))
-        self.ip_class_label.setText(self.ml.get_tr_text("tab_ip_information_ipclass_lab"))
-        self.ip_class_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.ip_type_label.setText(self.ml.get_tr_text("tab_ip_information_iptype_lab"))
-        self.ip_type_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.network_address_label.setText(self.ml.get_tr_text("tab_ip_information_netadd_lab"))
-        self.network_address_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.subnet_mask_label.setText(self.ml.get_tr_text("tab_ip_information_mask_lab"))
-        self.subnet_mask_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.first_addressable_ip_label.setText(self.ml.get_tr_text("tab_ip_information_firstip_lab"))
-        self.first_addressable_ip_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.last_addressable_ip_label.setText(self.ml.get_tr_text("tab_ip_information_lastip_lab"))
-        self.last_addressable_ip_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.broadcast_address_label.setText(self.ml.get_tr_text("tab_ip_information_bcastip_lab"))
-        self.broadcast_address_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.next_network_address_label.setText(self.ml.get_tr_text("tab_ip_information_nextnetip_lab"))
-        self.next_network_address_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-        self.max_endpoint_label.setText(self.ml.get_tr_text("tab_ip_information_maxend_lab"))
-        self.max_endpoint_copy_btn.setText(self.ml.get_tr_text("tab_ip_information_copy_btn"))
-
-        if self.ip_class_textfield.text() and self.ip_type_textfield.text():
-            self.ip_class_textfield.setText(self.ml.get_tr_text(get_ip_class(ip)))
-            self.ip_type_textfield.setText(self.ml.get_tr_text(get_ip_type(ip, prefix)))
 
 
 def copy_action(input_field_text):

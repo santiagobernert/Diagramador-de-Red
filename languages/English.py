@@ -1,4 +1,4 @@
-class English:
+class Titles:
     def __init__(self):
         # Main app
         self.main_app_title = "Network Assistant"

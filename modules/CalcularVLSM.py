@@ -7,7 +7,6 @@ from PySide2.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QLabel, QPushB
     QHeaderView
 from pyperclip import copy
 
-from utilities.ManageLng import ManageLng
 from utilities.PopupWindow import PopupWindow
 from utilities.Validator import is_empty, is_correct_network_address, is_correct_endpoint_numbers_per_network, is_correct_prefix
 
@@ -16,8 +15,6 @@ class VlsmCalculation(QWidget):
     def __init__(self):
         super(VlsmCalculation, self).__init__()
 
-        # Use language settings
-        self.ml = ManageLng()
 
         # App attributes
         self.network_ip = None
@@ -38,9 +35,9 @@ class VlsmCalculation(QWidget):
         top_bar.setHorizontalSpacing(40)
         main_layout.addLayout(top_bar)
 
-        self.starting_network_address_label = QLabel(self.ml.get_tr_text("tab_vlsm_starting_net"))
-        self.endpoint_numbers_per_network_label = QLabel(self.ml.get_tr_text("tab_vlsm_endpoint_nums"))
-        self.starting_network_prefix_label = QLabel(self.ml.get_tr_text("tab_vlsm_starting_net_prefix"))
+        self.starting_network_address_label = QLabel("Dirección de red inicial:")
+        self.endpoint_numbers_per_network_label = QLabel("Número de hosts en las redes (separar por coma) Ej: 1,2,3")
+        self.starting_network_prefix_label = QLabel("Prefijo de red inicial (opcional)")
 
         self.starting_network_address_input = QLineEdit()
         self.starting_network_address_input.returnPressed.connect(self.calculation_action)
@@ -70,12 +67,12 @@ class VlsmCalculation(QWidget):
         self.table.itemDoubleClicked.connect(copy_text_action)
 
         # Set table header labels
-        self.table_column_names = [self.ml.get_tr_text("table_column_network_add"),
-                                   self.ml.get_tr_text("table_column_ip_range"),
-                                   self.ml.get_tr_text("table_column_broadcast_add"),
-                                   self.ml.get_tr_text("table_column_subnet_mask"),
-                                   self.ml.get_tr_text("table_column_prefix"),
-                                   self.ml.get_tr_text("table_column_addressable_host")]
+        self.table_column_names = ["Dirección de red",
+                                   "Rango IP",
+                                   "Dirección de broadcast",
+                                   "Máscara de subred",
+                                   "Prefijo",
+                                   "Host accesible"]
 
         self.table.setHorizontalHeaderLabels(self.table_column_names)
 
@@ -97,7 +94,7 @@ class VlsmCalculation(QWidget):
         # If the starting network address is empty
         if is_empty(self.starting_network_address_input.text()):
             PopupWindow("warning",
-                        self.ml.get_tr_text("tab_vlsm_warning01"),
+                        "La red inicial no puede estar vacía!",
                         self.starting_network_address_input)
             return False
         else:
@@ -105,14 +102,14 @@ class VlsmCalculation(QWidget):
             # If the starting network address is incorrect
             if not is_correct_network_address(self.starting_network_address_input.text()):
                 PopupWindow("warning",
-                            self.ml.get_tr_text("tab_vlsm_warning02"),
+                            "Red inicial inválida!",
                             self.starting_network_address_input)
                 return False
 
         # If endpoint numbers are empty
         if is_empty(self.endpoint_numbers_per_network_input.text()):
             PopupWindow("warning",
-                        self.ml.get_tr_text("tab_vlsm_warning03"),
+                        "Ingresa el número de hosts por red!",
                         self.endpoint_numbers_per_network_input)
             return False
         else:
@@ -120,7 +117,7 @@ class VlsmCalculation(QWidget):
             # If endpoint numbers are incorrect
             if not is_correct_endpoint_numbers_per_network(self.endpoint_numbers_per_network_input.text()):
                 PopupWindow("warning",
-                            self.ml.get_tr_text("tab_vlsm_warning04"),
+                            "Número de hosts inválido!",
                             self.endpoint_numbers_per_network_input)
                 return False
 
@@ -128,7 +125,7 @@ class VlsmCalculation(QWidget):
         self.prefix = self.starting_network_prefix_input.text().replace("/", "").replace("\\", "")
         if not is_correct_prefix(self.prefix):
             PopupWindow("warning",
-                        self.ml.get_tr_text("tab_vlsm_warning05"),
+                        "El prefijo de la red inicial es inválido!",
                         self.starting_network_prefix_input)
             return False
         return True
@@ -200,7 +197,7 @@ class VlsmCalculation(QWidget):
                     self.inject_data_to_dict()
                 else:
                     PopupWindow("warning",
-                                self.ml.get_tr_text("tab_vlsm_warning06"),
+                                "Quieres demasiados hosts!\nRevisa los datos!",
                                 self.endpoint_numbers_per_network_input)
 
             elif 128 <= first_octet < 192:
@@ -208,7 +205,7 @@ class VlsmCalculation(QWidget):
                     self.inject_data_to_dict()
                 else:
                     PopupWindow("warning",
-                                self.ml.get_tr_text("tab_vlsm_warning07"),
+                                "Requieres muchos hosts para una red clase 'B' /16 inicial!\nPrueba una clase 'A' o un prefijo más chico!",
                                 self.endpoint_numbers_per_network_input)
 
             elif 192 <= first_octet < 224:
@@ -216,32 +213,17 @@ class VlsmCalculation(QWidget):
                     self.inject_data_to_dict()
                 else:
                     PopupWindow("warning",
-                                self.ml.get_tr_text("tab_vlsm_warning08"),
+                                "Requieres muchos hosts para una red clase 'C' /24 inicial!\nPrueba una clase 'B' o clase 'A' para la red inicial, o un prefijo más chico.",
                                 self.endpoint_numbers_per_network_input)
         else:
             if sum_all_hosts <= pow(2, 32 - int(self.prefix)):
                 self.inject_data_to_dict()
             else:
-                s1 = self.ml.get_tr_text("tab_vlsm_warning09a")
-                s2 = self.ml.get_tr_text("tab_vlsm_warning09b")
+                s1 = "Requieres muchos hosts para"
+                s2 = "la red inicial!\nRevisa los datos!"
                 PopupWindow("warning",
                             f"{s1} /{self.prefix} {s2}",
                             self.endpoint_numbers_per_network_input)
-
-    def re_translate_ui(self, lang):
-        self.ml = ManageLng(lang)
-
-        self.starting_network_address_label.setText(self.ml.get_tr_text("tab_vlsm_starting_net"))
-        self.endpoint_numbers_per_network_label.setText(self.ml.get_tr_text("tab_vlsm_endpoint_nums"))
-        self.starting_network_prefix_label.setText(self.ml.get_tr_text("tab_vlsm_starting_net_prefix"))
-        self.calculation_button.setText(self.ml.get_tr_text("tab_vlsm_calc_btn"))
-
-        self.table_column_names = [self.ml.get_tr_text("table_column_network_add"),
-                                   self.ml.get_tr_text("table_column_ip_range"),
-                                   self.ml.get_tr_text("table_column_broadcast_add"),
-                                   self.ml.get_tr_text("table_column_subnet_mask"),
-                                   self.ml.get_tr_text("table_column_prefix"),
-                                   self.ml.get_tr_text("table_column_addressable_host")]
 
         self.table.setHorizontalHeaderLabels(self.table_column_names)
 

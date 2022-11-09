@@ -8,7 +8,6 @@ from PySide2.QtWidgets import QVBoxLayout, QWidget, QLabel, QGridLayout, QLineEd
     QTableWidgetItem, QProgressBar, QHBoxLayout
 from pyperclip import copy
 
-from utilities.ManageLng import ManageLng
 from utilities.PopupWindow import PopupWindow
 from utilities.Validator import is_empty, is_correct_network_address, is_correct_number_of_subnets
 
@@ -16,9 +15,6 @@ from utilities.Validator import is_empty, is_correct_network_address, is_correct
 class IpSubnetCalculation(QWidget):
     def __init__(self):
         super(IpSubnetCalculation, self).__init__()
-
-        # Use language settings
-        self.ml = ManageLng()
 
         # App attributes
         self.network_ip = None
@@ -39,8 +35,8 @@ class IpSubnetCalculation(QWidget):
         top_bar.setHorizontalSpacing(40)
         main_layout.addLayout(top_bar)
 
-        self.starting_network_address_label = QLabel(self.ml.get_tr_text("tab_ipsubnet_starting_net"))
-        self.number_of_subnets_label = QLabel(self.ml.get_tr_text("tab_ipsubnet_required_subnet_num"))
+        self.starting_network_address_label = QLabel("Dirección de red inicial:")
+        self.number_of_subnets_label = QLabel("Número de subredes requeridas:")
 
         self.starting_network_address_input = QLineEdit()
         self.starting_network_address_input.returnPressed.connect(self.calculation_action)
@@ -61,12 +57,12 @@ class IpSubnetCalculation(QWidget):
         self.table.itemDoubleClicked.connect(copy_text_action)
         self.table.setColumnCount(6)
 
-        self.table_column_names = [self.ml.get_tr_text("table_column_network_add"),
-                                   self.ml.get_tr_text("table_column_ip_range"),
-                                   self.ml.get_tr_text("table_column_broadcast_add"),
-                                   self.ml.get_tr_text("table_column_subnet_mask"),
-                                   self.ml.get_tr_text("table_column_prefix"),
-                                   self.ml.get_tr_text("table_column_addressable_host")]
+        self.table_column_names = ["Dirección de red",
+                                   "Rango IP",
+                                   "Dirección de broadcast",
+                                   "Máscara de subred",
+                                   "Prefijo",
+                                   "Host accesible"]
 
         self.table.setHorizontalHeaderLabels(self.table_column_names)
 
@@ -91,7 +87,7 @@ class IpSubnetCalculation(QWidget):
         self.progressbar.setVisible(False)
 
         # Create cancel button
-        self.cancel_btn = QPushButton(self.ml.get_tr_text("tab_ipsubnet_cancel_btn"))
+        self.cancel_btn = QPushButton("Cancelar")
         self.cancel_btn.setVisible(False)
         self.cancel_btn.clicked.connect(self.terminate_calculation)
 
@@ -104,7 +100,7 @@ class IpSubnetCalculation(QWidget):
         # If the starting network address is empty
         if is_empty(self.starting_network_address_input.text()):
             PopupWindow("warning",
-                        self.ml.get_tr_text("tab_ipsubnet_warning01"),
+                        "La IP de inicio no puede estar vacía",
                         self.starting_network_address_input)
             return False
         else:
@@ -112,14 +108,14 @@ class IpSubnetCalculation(QWidget):
             # If the starting network address is incorrect
             if not is_correct_network_address(self.starting_network_address_input.text()):
                 PopupWindow("warning",
-                            self.ml.get_tr_text("tab_ipsubnet_warning02"),
+                            "IP de inicio inválida",
                             self.starting_network_address_input)
                 return False
 
         # If number of subnets is empty
         if is_empty(self.number_of_subnets_input.text()):
             PopupWindow("warning",
-                        self.ml.get_tr_text("tab_ipsubnet_warning03"),
+                        "Ingrese la cantidad de subredes requerida",
                         self.number_of_subnets_input)
             return False
         else:
@@ -127,7 +123,7 @@ class IpSubnetCalculation(QWidget):
             # If number of subnets is incorrect
             if not is_correct_number_of_subnets(self.number_of_subnets_input.text()):
                 PopupWindow("warning",
-                            self.ml.get_tr_text("tab_ipsubnet_warning04"),
+                            "Número de subredes inválido",
                             self.number_of_subnets_input)
                 return False
 
@@ -140,7 +136,7 @@ class IpSubnetCalculation(QWidget):
 
             # Unreal subnet number
             PopupWindow("warning",
-                        self.ml.get_tr_text("tab_ipsubnet_warning05"),
+                        "Esta cantidad de subredes no pueden ser generadas para la IP dada",
                         self.number_of_subnets_input)
             return False
 
@@ -196,23 +192,6 @@ class IpSubnetCalculation(QWidget):
             self.progressbar.setVisible(False)
             self.cancel_btn.setVisible(False)
             self.progressbar.setValue(0)
-
-    def re_translate_ui(self, lang):
-        self.ml = ManageLng(lang)
-
-        self.starting_network_address_label.setText(self.ml.get_tr_text("tab_ipsubnet_starting_net"))
-        self.number_of_subnets_label.setText(self.ml.get_tr_text("tab_ipsubnet_required_subnet_num"))
-        self.calculation_button.setText(self.ml.get_tr_text("tab_ipsubnet_calc_btn"))
-
-        self.table_column_names = [self.ml.get_tr_text("table_column_network_add"),
-                                   self.ml.get_tr_text("table_column_ip_range"),
-                                   self.ml.get_tr_text("table_column_broadcast_add"),
-                                   self.ml.get_tr_text("table_column_subnet_mask"),
-                                   self.ml.get_tr_text("table_column_prefix"),
-                                   self.ml.get_tr_text("table_column_addressable_host")]
-
-        self.table.setHorizontalHeaderLabels(self.table_column_names)
-        self.cancel_btn.setText(self.ml.get_tr_text("tab_ipsubnet_cancel_btn"))
 
 
 class CalculationWorker(QThread):
