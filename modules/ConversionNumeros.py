@@ -122,7 +122,7 @@ class ConversionNumeros(QWidget):
         ip_address_number_conversion_layout.setVerticalSpacing(24)
         self.ip_address_number_conversion_box.setLayout(ip_address_number_conversion_layout)
 
-        self.input_label = QLabel("Dirección IP/Máscara de subred")
+        self.input_label = QLabel("IP/Máscara")
         self.input_label.setAlignment(Qt.AlignCenter)
         self.input_label.setMaximumWidth(150)
         self.input_textfield = QLineEdit()

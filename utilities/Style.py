@@ -1,36 +1,36 @@
 def style():
     my_style = '''
-
 QWidget {
     font-size: 12px;
+    border-radius: 5%;
+    margin: 2px;
 }
 
 QMainWindow {
-    background-color: #232323;
+    background-color: #2e3440;
 }
 
 QGroupBox  {
-    background-color: #232323;
+    background-color: #3b4252;
     color: white;
 }
 
 QTabWidget::pane {
     border: none;
-    background-color: #232323;
 }
 
 QTabBar::tab {
-    background-color: #636d7d;
+    background-color: #434c5e;
     color: white;
 }
 
 QTabBar::tab:hover {
-    background-color: #c1c7ce;
-    color: black;
+    background-color: #4c566a;
+    color: white;
 }
 
 QTabBar::tab:selected {
-    background-color: white;
+    background-color: #D8DEE9;
     color: black;
 }
 
@@ -39,18 +39,18 @@ QRadioButton {
 }
 
 QPushButton {
-    background-color: #2a2f38;
+    background-color: #ECEFF4;
     border: 1px solid white;
-    border-radius: 2px;
     border-style: outset;
-    color: white;
+    color: black;
     min-width: 5em;
-    padding: 6px;
+    min-height: 1.3em;
+    padding: 7px;
 }
 
 QPushButton:hover {
-    background-color: #636d7d;
-    color: white;
+    background-color: #D8DEE9;
+    color: black;
 }
 
 QLabel {
@@ -60,6 +60,7 @@ QLabel {
 
 QLineEdit {
     font-size: 15px;
+    padding: 1px;
 }
 
 QLineEdit:read-only {
@@ -67,13 +68,15 @@ QLineEdit:read-only {
 }
 
 QTableWidget {
-    background-color: #272822;
+    background-color: #4C566A;
     color: white;
-    gridline-color: lightgray;
+    gridline-color: #4C566A;
 }
 
+QTableWidget::
+
 QTableWidget::item:hover {
-    background-color: #007a99;
+    background-color: #2E3440;
     color: white;
 }
 
@@ -89,7 +92,7 @@ QProgressBar {
 }
 
 QProgressBar::chunk {
-    background-color: DodgerBlue;
+    background-color: white;
 }
 
 QRadioButton {    
