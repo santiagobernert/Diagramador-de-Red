@@ -64,7 +64,7 @@ QLineEdit {
 }
 
 QLineEdit:read-only {
-    background-color: lightgreen;
+    background-color: #81a1c1;
 }
 
 QTableWidget {
