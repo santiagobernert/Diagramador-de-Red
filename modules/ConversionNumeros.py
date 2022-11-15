@@ -192,7 +192,7 @@ class ConversionNumeros(QWidget):
                     self.bin_format_base = bin_number_corrected
                     self.bin_format_base_byte = bin_number_corrected_byte
                     bin_format = get_bin_format(self.bin_format_base,
-                                                self.ml.get_tr_text("byte_format_str"),
+                                                "en formato byte: ",
                                                 self.bin_format_base_byte)
                 else:
                     bin_format = self.bin_format_base
@@ -216,7 +216,7 @@ class ConversionNumeros(QWidget):
                 self.bin_format_base_byte = self.bin_format_base.rjust(8, "0")
                 if self.bin_format_base != self.bin_format_base_byte:
                     bin_format = get_bin_format(self.bin_format_base,
-                                                self.ml.get_tr_text("byte_format_str"),
+                                                "en formato byte: ",
                                                 self.bin_format_base_byte)
                 else:
                     bin_format = self.bin_format_base
@@ -240,7 +240,7 @@ class ConversionNumeros(QWidget):
                 self.bin_format_base_byte = self.bin_format_base.rjust(8, "0")
                 if self.bin_format_base != self.bin_format_base_byte:
                     bin_format = get_bin_format(self.bin_format_base,
-                                                self.ml.get_tr_text("byte_format_str"),
+                                                "en formato byte: ",
                                                 self.bin_format_base_byte)
                 else:
                     bin_format = self.bin_format_base
