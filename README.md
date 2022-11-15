@@ -49,16 +49,16 @@ La aplicación ha sido desarrollada en python usando PySide2.
 ## Capturas
 **Información de la IP:**
 
-![Windows screenshot](screenshots/screenshot_windows_01.png)
+![Windows screenshot](screenshots/InformacionIP.png)
 
 **Conversión Numérica:**
 
-![Windows screenshot](screenshots/screenshot_windows_02.png)
+![Windows screenshot](screenshots/ConversorNumerico.png)
 
 **Calculadora de Subnetting:**
 
-![Windows screenshot](screenshots/screenshot_windows_03.png)
+![Windows screenshot](screenshots/CalculadoraSubnet.png)
 
 **Calculadora de VLSM:**
 
-![Windows screenshot](screenshots/screenshot_windows_04.png)
+![Windows screenshot](screenshots/CalculadoraVLSM.png)
