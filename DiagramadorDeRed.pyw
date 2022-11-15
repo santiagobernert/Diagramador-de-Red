@@ -29,7 +29,7 @@ class NetworkAssistant(QMainWindow):
         )
 
         # The version of the program
-        self.version = "v1.2"
+        self.version = "v1.0"
 
         # The title of the program
         self.setWindowTitle(f"{'Diagramador de Red'} {self.version}")
